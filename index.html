@@ -10,12 +10,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
         integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
 </head>
 
 <body>
     <div class="header">
         <p>Location of International Space Station</p>
     </div>
+
     <div class="main">
         <div class="text">
             <p>Visibility: <i id="time" class=""></i></p>
@@ -24,15 +29,18 @@
                 <p>Latitude: <span id="lat"></span></p>
                 <p> Longitude: <span id="lon"></span></p>
                 <p> Altitude: <span id="alt"></span> km</p>
-                <p> Speed: <span id="vel"></span> km/h</p>
-                <p> Maximum Speed: <span id="max"></span> km/h</p>
-                <p> Minimun Speed: <span id="min"></span> km/h</p>
-                <p> Average Speed: <span id="ave"></span> km/h</p>
                 <p> Approximate Position: <span id="pos"></span></p>
+                <div class="attributes">
+                    <p> Speed: <span id="vel"></span> km/h</p>
+                    <p> Maximum Speed: <span id="max"></span> km/h</p>
+                    <p> Minimun Speed: <span id="min"></span> km/h</p>
+                    <p> Average Speed: <span id="ave"></span> km/h</p>
+                </div>
+
             </div>
         </div>
     </div>
-
+    <div id="map"></div>
     <script src="script.js"></script>
 </body>
 
