@@ -36,15 +36,16 @@ body {
 }
 
 #map {
-    height: 420px;
-    width: 980px;
+    height: 480px;
+    width: 710px;
     padding: 2em;
     margin: 1em;
     position: absolute;
-    top: 20rem;
-    left: 60rem;
+    top: 21rem;
+    left: 60.3rem;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+    border: 2px solid black;
 }
 
 .text {
@@ -68,4 +69,29 @@ body {
     margin: 0;
     top: -7.2rem;
     left: 26rem;
+}
+
+.btn-box {
+    position: absolute;
+    top: -65px;
+    left: 170px;
+}
+
+.btn-switch {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    width: 70px;
+    height: 25px;
+    position: relative;
+    top: 7px;
+    left: -60px;
+    font-size: 1em;
+    text-align: center;
+    border: none;
+    border-radius: 18px;
+}
+
+.btn-switch:hover {
+    transition: 0.2s ease-in-out;
+    background-color: #72748d;
+    cursor: pointer;
 }

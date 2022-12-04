@@ -1,5 +1,5 @@
 //Create map and tiles
-const map = L.map('map').setView([0, 0], 1); //.setView([latitude, longitude],zoom)
+const map = L.map('map').setView([0, 0], 2); //.setView([latitude, longitude],zoom)
 const attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const tiles = L.tileLayer(tileUrl, { attribution });
@@ -42,7 +42,7 @@ async function getISS() {
     marker.setLatLng([latitude, longitude]);
     locationISS(latitude, longitude, visibility);
     printAttributes(velocityData, latitude, longitude, altitude, velocity, sum);
-    setTimeout(getISS, 5000);
+    setTimeout(getISS, 4000);
 }
 
 function locationISS(latitude, longitude, visibility) {
