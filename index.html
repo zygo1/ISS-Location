@@ -18,28 +18,36 @@
 
 <body>
     <div class="header">
-        <p>Location of International Space Station</p>
+        <p>Location of the International Space Station</p>
+        <div class="dropdown">
+            <label for="lang">Language: </label>
+            <select name="lang" id="lang">
+                <option value="en">English</option>
+                <option value="gr">Greek</option>
+                <option value="es">Spanish</option>
+            </select>
+        </div>
     </div>
 
     <div class="main">
         <div class="text">
-            <p>Visibility: <i id="time" class=""></i></p>
-            <h1>Where is the ISS?</h1>
+            <h1>ISS Attributes</h1>
+            <div class="btn-box">
+                <label for="btn-satellite">Visibility: <i id="time"></i></label>
+                <button name="btn-satellite" id="btn-satellite">Satellite</button>
+                <button id="btn-map">Map</button>
+            </div>
             <div class="paragraphs">
                 <p>Latitude: <span id="lat"></span></p>
                 <p> Longitude: <span id="lon"></span></p>
                 <p> Altitude: <span id="alt"></span> km</p>
                 <p> Approximate Position: <span id="pos"></span></p>
                 <div class="attributes">
-                    <div class="btn-box">
-                        <button class="btn-switch">Satellite</button>
-                    </div>
                     <p> Speed: <span id="vel"></span> km/h</p>
                     <p> Maximum Speed: <span id="max"></span> km/h</p>
                     <p> Minimun Speed: <span id="min"></span> km/h</p>
                     <p> Average Speed: <span id="ave"></span> km/h</p>
                 </div>
-
             </div>
         </div>
     </div>
