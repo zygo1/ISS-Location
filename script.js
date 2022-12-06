@@ -1,6 +1,7 @@
 "use strict"
+//!Leaflet Map Settings-------------------------------------------------
 //init map
-let map = L.map('map').setView([0, 0], 2); //.setView([latitude, longitude],zoom)
+let map = L.map('map').setView([0, 0], 1); //.setView([latitude, longitude],zoom)
 let attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 let attributionSat = 'i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
 
@@ -15,6 +16,8 @@ L.tileLayer(
     tileUrlSat, {
     attribution: '&copy; ' + mapLink + ', ' + attributionSat,
     maxZoom: 20,
+    minZoom: 1,
+    noWrap: true,
 }).addTo(map);
 
 //Set custom icon to the marker
@@ -24,12 +27,27 @@ const myIcon = L.icon({
     iconAnchor: [25, 16],
 });
 
+//Create Map Bounds
+let southWest = L.latLng(-90, -180),
+    northEast = L.latLng(90, 180);
+let bounds = L.latLngBounds(southWest, northEast);
+map.setMaxBounds(bounds);
+map.on('drag', function () {
+    map.panInsideBounds(bounds, { animate: false });
+});
+
 //Reset marker to 0,0 
-const marker = L.marker([0, 0], { icon: myIcon }).addTo(map);
+const marker = L.marker([0, 0], {
+    icon: myIcon,
+    title: "International Space Station",
+}).addTo(map);
+
+
+//!Leaflet Map Settings------------------------------------------------------------
+
 
 //Retrieve data from JSON
 let url = './language/gr.json'
-
 
 function printAttributes(velocityData, lat, long, alt, velocity, sum, visibilityValue) {
     //Labels
@@ -79,7 +97,12 @@ function printAttributes(velocityData, lat, long, alt, velocity, sum, visibility
 }
 
 function switchToMap() {
-    L.tileLayer(tileUrl, { attribution }).addTo(map);
+    L.tileLayer(tileUrl, {
+        attribution,
+        maxZoom: 20,
+        minZoom: 1,
+        noWrap: true,
+    }).addTo(map);
 }
 
 function switchToSatellite() {
@@ -87,6 +110,8 @@ function switchToSatellite() {
         tileUrlSat, {
         attribution: '&copy; ' + mapLink + ', ' + attributionSat,
         maxZoom: 20,
+        minZoom: 1,
+        noWrap: true,
     }).addTo(map);
 }
 
