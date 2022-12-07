@@ -13,7 +13,7 @@ body {
     color: #2e304d;
     font-size: 1.6rem;
     width: 100%;
-    height: 60px;
+
     text-align: center;
     position: absolute;
 }
@@ -29,7 +29,7 @@ body {
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     width: 700px;
-    height: 160px;
+    height: 165px;
     margin: 16px;
     padding: 16px;
     border: 2px solid black;
@@ -68,14 +68,13 @@ body {
 }
 
 
-/*TODO: na allazei to wifth otan allazei to language */
+/*TODO: na allazei to width otan allazei to language */
 #btn-satellite {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     width: 95px;
-    height: 25px;
     font-size: 1em;
     text-align: center;
-    margin: 0 8px;
+    margin: 0px 4px;
     border: none;
     border-radius: 18px;
 }
@@ -83,10 +82,9 @@ body {
 #btn-map {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     width: 70px;
-    height: 25px;
     font-size: 1em;
     text-align: center;
-    margin: 0 8px;
+    margin: 0px 4px;
     border: none;
     border-radius: 18px;
 }

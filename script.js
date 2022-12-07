@@ -8,7 +8,6 @@ let attributionSat = 'i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IG
 //Create map tiles
 let tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 
-
 //Create satellite tiles
 let mapLink = '<a href="http://www.esri.com/">Esri</a>';
 let tileUrlSat = 'http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
@@ -20,10 +19,18 @@ L.tileLayer(
     noWrap: true,
 }).addTo(map);
 
-//Set custom icon to the marker
+//Set custom icons to the markers
+//White for satellite map
 const myIcon = L.icon({
-    iconUrl: 'icons/iss.png',
-    iconSize: [50, 32],
+    iconUrl: 'icons/satelliteWhite.png',
+    iconSize: [38, 38],
+    iconAnchor: [25, 16],
+});
+
+//Black for simple map
+const myIcon2 = L.icon({
+    iconUrl: 'icons/satellite.png',
+    iconSize: [38, 38],
     iconAnchor: [25, 16],
 });
 
@@ -42,9 +49,7 @@ const marker = L.marker([0, 0], {
     title: "International Space Station",
 }).addTo(map);
 
-
 //!Leaflet Map Settings------------------------------------------------------------
-
 
 //Retrieve data from JSON
 let url = './language/gr.json'
@@ -96,25 +101,6 @@ function printAttributes(velocityData, lat, long, alt, velocity, sum, visibility
     }
 }
 
-function switchToMap() {
-    L.tileLayer(tileUrl, {
-        attribution,
-        maxZoom: 20,
-        minZoom: 1,
-        noWrap: true,
-    }).addTo(map);
-}
-
-function switchToSatellite() {
-    L.tileLayer(
-        tileUrlSat, {
-        attribution: '&copy; ' + mapLink + ', ' + attributionSat,
-        maxZoom: 20,
-        minZoom: 1,
-        noWrap: true,
-    }).addTo(map);
-}
-
 const api_url = "https://api.wheretheiss.at/v1/satellites/25544";
 const velocityData = [];
 let sum = 0;
@@ -131,7 +117,25 @@ async function getISS() {
 }
 
 //Buttons
-document.getElementById('btn-satellite').addEventListener('click', switchToSatellite);
-document.getElementById('btn-map').addEventListener('click', switchToMap);
+document.getElementById('btn-satellite').addEventListener('click', function () {
+    L.tileLayer(
+        tileUrlSat, {
+        attribution: '&copy; ' + mapLink + ', ' + attributionSat,
+        maxZoom: 20,
+        minZoom: 1,
+        noWrap: true,
+    }).addTo(map);
+    marker.setIcon(myIcon);
+});
+
+document.getElementById('btn-map').addEventListener('click', function () {
+    L.tileLayer(tileUrl, {
+        attribution,
+        maxZoom: 20,
+        minZoom: 1,
+        noWrap: true,
+    }).addTo(map);
+    marker.setIcon(myIcon2);
+});
 
 getISS();
