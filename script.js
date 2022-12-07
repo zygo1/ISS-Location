@@ -49,6 +49,22 @@ const marker = L.marker([0, 0], {
     title: "International Space Station",
 }).addTo(map);
 
+
+// //Add marker on click
+// map.on('click', function (e) {
+//     let mp = new L.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
+// })
+
+//Scale
+L.control.scale({
+    metric: true,
+    imperial: false,
+    maxWidth: 150,
+    position: 'topright',
+    title: 'Scale',
+}).addTo(map);
+
+
 //!Leaflet Map Settings------------------------------------------------------------
 
 //Retrieve data from JSON
