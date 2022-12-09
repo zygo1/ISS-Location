@@ -77,7 +77,7 @@ function validateLanguage() {
 let select = document.getElementById('language');
 select.addEventListener('change', function () {
     url = validateLanguage();
-    //getISS //! but it's called too many times and got 404 cuz of too many requests...
+    getISS();
 });
 
 async function printAttributes(velocityData, lat, long, alt, velocity, sum, visibilityValue) {
@@ -141,7 +141,6 @@ async function getISS() {
     velocityData.push(velocity);
     marker.setLatLng([latitude, longitude]);
     printAttributes(velocityData, latitude, longitude, altitude, velocity, sum, visibility);
-    setInterval(getISS, 4000);
 }
 
 //Buttons
@@ -167,3 +166,4 @@ document.getElementById('btn-map').addEventListener('click', function () {
 });
 
 getISS();
+setInterval(getISS, 4000);
