@@ -50,7 +50,7 @@ const marker = L.marker([0, 0], {
 }).addTo(map);
 
 
-// //Add marker on click
+//Add marker on click
 // map.on('click', function (e) {
 //     let mp = new L.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
 // })
@@ -63,64 +63,76 @@ L.control.scale({
     position: 'topright',
     title: 'Scale',
 }).addTo(map);
-
-
 //!Leaflet Map Settings------------------------------------------------------------
 
-//Retrieve data from JSON
-let url = './language/gr.json'
-
-function printAttributes(velocityData, lat, long, alt, velocity, sum, visibilityValue) {
-    //Labels
-    //  //TODO: add these to html doc
-    // let getLangData = async function (url) {
-    //     let response = await fetch(url);
-    //     let data = response.json();
-    //     let { latitude, longitude, altitude, approximatePos, visibility, speed } = data;
-    // };
-
-    // console.log(data)
-    // let myVariable = "" + data + longitude;
-
-    // document.getElementById('lat').textContent = myVariable;
-
-    //Values
-    document.getElementById("lat").textContent = lat.toFixed(4);
-    document.getElementById("lon").textContent = long.toFixed(4);
-    document.getElementById("alt").textContent = alt.toFixed(3);
-    document.getElementById("vel").textContent = velocity.toFixed(3);
-    document.getElementById("ave").textContent = (sum / velocityData.length).toFixed(3);
-    document.getElementById("max").textContent = (Math.max(...velocityData).toFixed(3));
-    document.getElementById("min").textContent = (Math.min(...velocityData).toFixed(3));
-
-    if (lat > 1 && long < 0) {
-        document.getElementById('pos').textContent = "North-Western Hemisphere"
-    }
-    else if (lat > 1 && long > 0) {
-        document.getElementById('pos').textContent = "North-Eastern Hemisphere"
-    }
-    else if (lat < -1 && long < 0) {
-        document.getElementById('pos').textContent = "South-Western Hemisphere"
-    }
-    else if (lat < -1 && long > 0) {
-        document.getElementById('pos').textContent = "South-Eastern Hemisphere"
-    }
-    else if (lat >= -1.0 && lat <= 1.0) {
-        document.getElementById('pos').textContent = "Equator"
-    }
-
-    if (visibilityValue === "daylight") {
-        document.getElementById('time').className = "fa-solid fa-sun"
-    }
-    else {
-        document.getElementById('time').className = "fa-solid fa-moon"
-    }
+//Language Events
+let url = './language/en.json';
+function validateLanguage() {
+    let ddl = document.getElementById('language');
+    let selectedLang = ddl.options[ddl.selectedIndex].value;
+    let url = selectedLang === "en" ? './language/en.json' : './language/gr.json';
+    return url;
 }
 
+let select = document.getElementById('language');
+select.addEventListener('change', function () {
+    url = validateLanguage();
+    //getISS //! but it's called too many times and got 404 cuz of too many requests...
+});
+
+async function printAttributes(velocityData, lat, long, alt, velocity, sum, visibilityValue) {
+    //Get data
+    const response = await fetch(url);
+    const data = await response.json();
+    let {
+        locationIss, language, attributes, latitude, longitude, altitude, approximatePos,
+        visibility, speed, maximumSpeed, minimumSpeed, averageSpeed, satellite, map, kmh, km, north_Western,
+        north_Eastern, south_Western, south_Eastern, equator
+    } = data;
+
+    //Labels
+    document.getElementById('text-header').textContent = locationIss;
+    document.getElementById('lang').textContent = language + ": ";
+    document.getElementById('attr').textContent = attributes;
+    document.getElementById('btn-satellite').textContent = satellite;
+    document.getElementById('btn-map').textContent = map;
+    document.getElementById('visibility').textContent = visibility + ": ";
+
+    //Values
+    document.getElementById("lat").textContent = "" + latitude + ": " + lat.toFixed(4);
+    document.getElementById("lon").textContent = "" + longitude + ": " + long.toFixed(4);
+    document.getElementById("alt").textContent = "" + altitude + ": " + alt.toFixed(3);
+    document.getElementById("vel").textContent = "" + speed + ": " + velocity.toFixed(3) + " " + km;
+    document.getElementById("ave").textContent = "" + averageSpeed + ": " + (sum / velocityData.length).toFixed(3) + " " + kmh;
+    document.getElementById("max").textContent = "" + maximumSpeed + ": " + (Math.max(...velocityData).toFixed(3)) + " " + kmh;
+    document.getElementById("min").textContent = "" + minimumSpeed + ": " + (Math.min(...velocityData).toFixed(3)) + " " + kmh;
+
+    //Approximate Position Calculation
+    if (lat > 1 && long < 0) {
+        document.getElementById('pos').textContent = "" + approximatePos + ": " + north_Western;
+    }
+    else if (lat > 1 && long > 0) {
+        document.getElementById('pos').textContent = "" + approximatePos + ": " + north_Eastern;
+    }
+    else if (lat < -1 && long < 0) {
+        document.getElementById('pos').textContent = "" + approximatePos + ": " + south_Western;
+    }
+    else if (lat < -1 && long > 0) {
+        document.getElementById('pos').textContent = "" + approximatePos + ": " + south_Eastern;
+    }
+    else if (lat >= -1.0 && lat <= 1.0) {
+        document.getElementById('pos').textContent = "" + approximatePos + ": " + equator;
+    }
+
+    //Visibility Icon
+    visibilityValue === "daylight" ? document.getElementById('time').className = "fa-solid fa-sun" : document.getElementById('time').className = "fa-solid fa-moon";
+};
+
+
+//Main
 const api_url = "https://api.wheretheiss.at/v1/satellites/25544";
 const velocityData = [];
 let sum = 0;
-//Main
 async function getISS() {
     const response = await fetch(api_url);
     const data = await response.json();
@@ -129,7 +141,7 @@ async function getISS() {
     velocityData.push(velocity);
     marker.setLatLng([latitude, longitude]);
     printAttributes(velocityData, latitude, longitude, altitude, velocity, sum, visibility);
-    setTimeout(getISS, 4000);
+    setInterval(getISS, 4000);
 }
 
 //Buttons
