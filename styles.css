@@ -8,26 +8,27 @@ body {
     overflow: hidden;
 }
 
+
 .header {
+    display: block;
     background-color: #c0c0c0;
     color: #2e304d;
     font-size: 1.6rem;
     width: 100%;
-
     text-align: center;
     position: absolute;
+    margin-bottom: 16px;
 }
 
-.main {
+.panel {
     display: block;
     background-color: #c0c0c0;
     color: #2e304d;
-    margin: 0;
     position: absolute;
-    top: 46em;
-    left: 60em;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    top: 70%;
+    left: 30%;
+    /* -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); */
     width: 720px;
     height: 165px;
     margin: 16px;
@@ -37,15 +38,14 @@ body {
 }
 
 #map {
+    display: flex;
     height: 480px;
     width: 484px;
     padding: 16px;
     margin: 16px;
     position: absolute;
-    top: 21rem;
-    left: 60.3rem;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    top: 10%;
+    left: 36%;
     border: 2px solid black;
 }
 
@@ -56,7 +56,7 @@ body {
     left: 26rem;
 }
 
-.text>h1 {
+.panel>h1 {
     position: relative;
     top: -10px;
 }

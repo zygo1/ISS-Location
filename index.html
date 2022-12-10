@@ -17,39 +17,48 @@
 </head>
 
 <body>
-    <div class="header">
-        <p id="text-header"></p>
-        <div class="dropdown">
-            <label for="lang" id="lang"></label>
-            <select name="lang" id="language">
-                <option value="en">English</option>
-                <option value="gr">Greek</option>
-            </select>
-        </div>
-    </div>
+    <!-- main -->
     <div class="main">
-        <div class="text">
-            <h1 id="attr">ISS Attributes</h1>
+        <!-- header -->
+        <div class="header">
+            <p id="text-header"></p>
+            <div class="dropdown">
+                <label for="lang" id="lang"></label>
+                <select name="lang" id="language">
+                    <option value="en">English</option>
+                    <option value="gr">Greek</option>
+                </select>
+            </div>
+        </div>
+        <!-- map -->
+        <div id="map"></div>
+        <!-- attributes -->
+        <div class="panel">
+            <h1 id="attr"></h1>
+            <!-- buttons -->
             <div class="btn-box">
                 <label id="visibility"></label><i id="time" class=""></i>
                 <button name="btn-satellite" id="btn-satellite"></button>
                 <button id="btn-map"></button>
             </div>
+            <!-- left stats -->
             <div class="paragraphs">
                 <p><span id="lat"></span></p>
                 <p><span id="lon"></span></p>
                 <p><span id="alt"></span></p>
                 <p><span id="pos"></span></p>
-                <div class="attributes">
-                    <p><span id="vel"></span></p>
-                    <p><span id="max"></span></p>
-                    <p><span id="min"></span></p>
-                    <p><span id="ave"></span></p>
-                </div>
+            </div>
+            <!-- right stats -->
+            <div class="attributes">
+                <p><span id="vel"></span></p>
+                <p><span id="max"></span></p>
+                <p><span id="min"></span></p>
+                <p><span id="ave"></span></p>
             </div>
         </div>
     </div>
-    <div id="map"></div>
+
+
     <script src="script.js"></script>
 </body>
 
