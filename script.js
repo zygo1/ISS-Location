@@ -85,14 +85,13 @@ async function printAttributes(velocityData, lat, long, alt, velocity, sum, visi
     const response = await fetch(url);
     const data = await response.json();
     let {
-        locationIss, language, attributes, latitude, longitude, altitude, approximatePos,
+        locationIss, attributes, latitude, longitude, altitude, approximatePos,
         visibility, speed, maximumSpeed, minimumSpeed, averageSpeed, satellite, map, kmh, km, north_Western,
         north_Eastern, south_Western, south_Eastern, equator
     } = data;
 
     //Labels
     document.getElementById('text-header').textContent = locationIss;
-    document.getElementById('lang').textContent = language + ": ";
     document.getElementById('attr').textContent = attributes;
     document.getElementById('btn-satellite').textContent = satellite;
     document.getElementById('btn-map').textContent = map;
