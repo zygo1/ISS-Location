@@ -100,7 +100,7 @@ async function printAttributes(velocityData, lat, long, alt, velocity, sum, visi
     //Values
     document.getElementById("lat").textContent = "" + latitude + ": " + lat.toFixed(4);
     document.getElementById("lon").textContent = "" + longitude + ": " + long.toFixed(4);
-    document.getElementById("alt").textContent = "" + altitude + ": " + alt.toFixed(3);
+    document.getElementById("alt").textContent = "" + altitude + ": " + alt.toFixed(3) + " " + km;
     document.getElementById("vel").textContent = "" + speed + ": " + velocity.toFixed(3) + " " + km;
     document.getElementById("ave").textContent = "" + averageSpeed + ": " + (sum / velocityData.length).toFixed(3) + " " + kmh;
     document.getElementById("max").textContent = "" + maximumSpeed + ": " + (Math.max(...velocityData).toFixed(3)) + " " + kmh;
