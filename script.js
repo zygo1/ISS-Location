@@ -66,23 +66,23 @@ L.control.scale({
 //!Leaflet Map Settings------------------------------------------------------------
 
 //Language Events
-let url = './language/en.json';
+let path = './language/en.json';
 function validateLanguage() {
     let ddl = document.getElementById('language');
     let selectedLang = ddl.options[ddl.selectedIndex].value;
-    let url = selectedLang === "en" ? './language/en.json' : './language/gr.json';
-    return url;
+    let path = selectedLang === "en" ? './language/en.json' : './language/gr.json';
+    return path;
 }
 
 let select = document.getElementById('language');
 select.addEventListener('change', function () {
-    url = validateLanguage();
+    path = validateLanguage();
     getISS();
 });
 
 async function printAttributes(velocityData, lat, long, alt, velocity, sum, visibilityValue) {
     //Get data
-    const response = await fetch(url);
+    const response = await fetch(path);
     const data = await response.json();
     let {
         locationIss, attributes, latitude, longitude, altitude, approximatePos,
